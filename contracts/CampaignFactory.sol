@@ -1,17 +1,5 @@
-pragma solidity 0.5.8;
+pragma solidity ^0.5.8;
 
-contract CampaignFactory {
-    address[] public deployedCampaigns;
-
-    function createCampaign(uint minimum) public {
-        address newCampaign = address(new Campaign(minimum, msg.sender));   //explicit conversion is required
-        deployedCampaigns.push(newCampaign);
-    }
-
-    function getDeployedCampaigns() public view returns (address[] memory){
-        return deployedCampaigns;
-    }
-}
 
 contract Campaign {
 
@@ -95,4 +83,18 @@ contract Campaign {
   function getRequestsCount() public view returns (uint) {
       return requests.length;
   }
+}
+
+
+contract CampaignFactory {
+    address[] public deployedCampaigns;
+
+    function createCampaign(uint minimum) public {
+        address newCampaign = address(new Campaign(minimum, msg.sender));   //explicit conversion is required
+        deployedCampaigns.push(newCampaign);
+    }
+
+    function getDeployedCampaigns() public view returns (address[] memory){
+        return deployedCampaigns;
+    }
 }

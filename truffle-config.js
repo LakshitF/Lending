@@ -1,5 +1,5 @@
-const mnemonic = require('custom-config.js')
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const mnemonic = "unusual replace window denial vendor awesome spoon explain regret strike piano north";
+const HDWalletProvider = require("truffle-hdwallet-provider");
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
