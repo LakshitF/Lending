@@ -4,6 +4,7 @@ pragma solidity ^0.5.8;
 // this.projectData[index].contract.methods.getRefund().send({
 //     from: this.account,  , this this.account would be the sender of the message
 //   })
+//sending money is done to the contract address.    The frontend will have the address for it.
 
 contract Campaign {
     //actually manager and recipient are the same here.
@@ -11,7 +12,6 @@ contract Campaign {
     uint value;
     address payable recipient;
     bool complete;
-    address payable manager;
     uint public minimumContribution;
     mapping(address => bool) public approvers;
     mapping(address => uint) public contributions;
@@ -20,13 +20,12 @@ contract Campaign {
     uint total=0;
     uint curtime;
     modifier restricted(){
-        require(msg.sender == manager,"not equal");
+        require(msg.sender == recipient,"not equal");
         _;  //super imp
     }
 
 
-    constructor (uint minimum, address payable creator,string memory desc,uint val,address payable reci,uint last) public {
-        manager = creator;
+    constructor (uint minimum,string memory desc,uint val,address payable reci,uint last) public {
         minimumContribution = minimum;
         description = desc;
         value = val;
