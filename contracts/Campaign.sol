@@ -1,4 +1,4 @@
-pragma solidity ^0.5.8;
+pragma solidity ^0.6.1;
 //anyone should be able to make contract using this factory  and he becomes manager
 
 // this.projectData[index].contract.methods.getRefund().send({
@@ -76,6 +76,14 @@ contract Campaign {
         }
     }
     
+    function getDeadline() public view returns (uint){
+        return deadline;
+    }
+
+    function getDescription() public view returns (string memory){
+        return description;
+    }
+
 
 
 }
