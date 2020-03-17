@@ -1,4 +1,4 @@
-pragma solidity ^0.6.1;
+pragma solidity >=0.4.0 <0.7.0;
 //anyone should be able to make contract using this factory  and he becomes manager
 
 // this.projectData[index].contract.methods.getRefund().send({
@@ -9,15 +9,15 @@ pragma solidity ^0.6.1;
 contract Campaign {
     //actually manager and recipient are the same here.
     string public description;
-    uint value;
+    uint public value;
     address payable recipient;
-    bool complete;
+    bool public complete;
     uint public minimumContribution;
     mapping(address => bool) public approvers;
     mapping(address => uint) public contributions;
     uint public approversCount;
     uint deadline;
-    uint total=0;
+    uint public total=0;
     uint curtime;
     modifier restricted(){
         require(msg.sender == recipient,"not equal");

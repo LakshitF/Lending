@@ -1,5 +1,4 @@
 const mnemonic = "unusual replace window denial vendor awesome spoon explain regret strike piano north";
-const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -14,10 +13,12 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 7545,
+      networkCheckTimeout: 10000000,
       network_id: "*" // Match any network id
     },
     develop: {
-      port: 8545
+      port: 7545,
+      networkCheckTimeout: 10000000
     }
   }
 };
