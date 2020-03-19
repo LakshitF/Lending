@@ -36,6 +36,12 @@ contract Campaign {
     function contribute() payable public {
         require(msg.value > minimumContribution,"You do not meet the minimum contribution");
         //this contract has automatically received the intended amount from where it was called.
+        bool success = recipient.call().value(msg.value)("");
+        if(success==false){
+            require(1>2,'Transaction failed');
+            return;
+        }
+
         if(approvers[msg.sender]){
             contributions[msg.sender] = contributions[msg.sender] + msg.value;
         }
@@ -44,30 +50,31 @@ contract Campaign {
             contributions[msg.sender] = msg.value;
             approversCount++;
         }
+        total = total + msg.value;
         finalize(); //check after each contribution
     }
 
     //This function is called by the person who earlier contributed to this campaign
-    function getRefund() public returns (bool) {
-        require(contributions[msg.sender] > 0 ,"You have 0 contributions to this campaign");
-        uint refund = contributions[msg.sender];    //whosoever called this function using from: attribute
-        contributions[msg.sender] = 0;
+    // function getRefund() public returns (bool) {
+    //     require(contributions[msg.sender] > 0 ,"You have 0 contributions to this campaign");
+    //     uint refund = contributions[msg.sender];    //whosoever called this function using from: attribute
+    //     contributions[msg.sender] = 0;
 
-        if(msg.sender.send(refund) ){
-            return true;
-        }
-        else{   //if the transaction failed for some reason
-            contributions[msg.sender] = refund;
-            return false;
-        }
-    }
+    //     if(msg.sender.send(refund) ){
+    //         return true;
+    //     }
+    //     else{   //if the transaction failed for some reason
+    //         contributions[msg.sender] = refund;
+    //         return false;
+    //     }
+    // }
 
     function finalize() public{
 
         if(total>=value){
             complete = true;
             //goes from contract to recipient
-            recipient.transfer(total);
+
             return;
         }
         else{

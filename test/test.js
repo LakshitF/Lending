@@ -12,3 +12,7 @@ Campaign.at('0x5eE255B0DB72c9c50336602De1c97EB46A13E45F').then(inst=>{c=inst});
 USe to access public variables:
 c.value()
 c.value().then(num=>{let temp = num.toNumber(); console.log(temp);})    //to convert to number
+
+//Now make an investor who invests in this.
+0xCb0fEa7A27364c76A69b98007FfF1D56305F295F wants to contribute 400 wei
+c.contribute({from:'0xCb0fEa7A27364c76A69b98007FfF1D56305F295F',value:400}).then(err=>console.log(err));
