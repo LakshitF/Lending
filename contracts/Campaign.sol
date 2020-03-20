@@ -5,6 +5,7 @@ pragma solidity >=0.4.0 <0.7.0;
 //     from: this.account,  , this this.account would be the sender of the message
 //   })
 //sending money is done to the contract address.    The frontend will have the address for it.
+import "./Console.sol";
 
 contract Campaign {
     //actually manager and recipient are the same here.
@@ -33,14 +34,13 @@ contract Campaign {
         deadline = last;
     }
 
-    function contribute() payable public {
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
+    //ether is put into a contract, whenever account calls this function
+    function contribute() public payable {
         require(msg.value > minimumContribution,"You do not meet the minimum contribution");
-        //this contract has automatically received the intended amount from where it was called.
-        bool success = recipient.call().value(msg.value)("");
-        if(success==false){
-            require(1>2,'Transaction failed');
-            return;
-        }
 
         if(approvers[msg.sender]){
             contributions[msg.sender] = contributions[msg.sender] + msg.value;
@@ -68,18 +68,19 @@ contract Campaign {
     //         return false;
     //     }
     // }
-
+    
+    //from contract to actual recipient
     function finalize() public{
 
         if(total>=value){
             complete = true;
             //goes from contract to recipient
-
+            recipient.transfer(total);
             return;
         }
         else{
-            require(1==1,"Does not have sufficient funds yet");
             //if time exceeded
+            
         }
     }
     
