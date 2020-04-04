@@ -1,6 +1,4 @@
-//all contracts get managed by administrator account (acc[0] only) 
-let a;letc;
-CampaignFactory.deployed().then(inst=>{a=inst});    //now it will work.
+//ALL WORKING NOW
 CampaignFactory.at('0x3d3410425DC76b77aAb60DAf36b9D8b69ad7d085').then(inst=>{a=inst});  //this is the address from ganache cli
 
 //NEW WAY
@@ -16,3 +14,4 @@ c.value().then(num=>{let temp = num.toNumber(); console.log(temp);})    //to con
 //Now make an investor who invests in this.
 0xCb0fEa7A27364c76A69b98007FfF1D56305F295F wants to contribute 400 wei
 c.contribute({from:'0xCb0fEa7A27364c76A69b98007FfF1D56305F295F',value:4000000}).then(err=>console.log(err));
+//this sends ether from the address to the contract.
