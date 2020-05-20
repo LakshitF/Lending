@@ -15,3 +15,5 @@ c.value().then(num=>{let temp = num.toNumber(); console.log(temp);})    //to con
 0xCb0fEa7A27364c76A69b98007FfF1D56305F295F wants to contribute 400 wei
 c.contribute({from:'0xCb0fEa7A27364c76A69b98007FfF1D56305F295F',value:4000000}).then(err=>console.log(err));
 //this sends ether from the address to the contract.
+
+First ensure that the contract exists in the proper location 
