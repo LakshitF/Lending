@@ -62,23 +62,12 @@ contract Campaign {
         finalize(); //check after each contribution
     }
 
-    //This function is called by the person who earlier contributed to this campaign
-    // function getRefund() public returns (bool) {
-    //     require(contributions[msg.sender] > 0 ,"You have 0 contributions to this campaign");
-    //     uint refund = contributions[msg.sender];    //whosoever called this function using from: attribute
-    //     contributions[msg.sender] = 0;
-
-    //     if(msg.sender.send(refund) ){
-    //         return true;
-    //     }
-    //     else{   //if the transaction failed for some reason
-    //         contributions[msg.sender] = refund;
-    //         return false;
-    //     }
-    // }
-
     //from contract to actual recipient
     function finalize() public {
+        
+        if(complete==true)
+            return;
+        
         if (total >= value) {
             complete = true;
             //goes from contract to recipient
@@ -87,6 +76,8 @@ contract Campaign {
         } else {
             //if time exceeded
         }
+        
+        
     }
 
     function getDeadline() public view returns (uint256) {
@@ -99,5 +90,9 @@ contract Campaign {
 
     function getTotal() public view returns (uint256) {
         return total;
+    }
+    // Necessary in the frontend to display the lending/donations
+    function getApprovers public view returns(uint256){
+        return approversCount;
     }
 }
